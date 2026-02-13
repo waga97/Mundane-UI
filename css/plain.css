@@ -1,0 +1,220 @@
+@import './base.css';
+
+/* mundane-ui: plain.css — the default plain theme */
+
+:root {
+  /* Typography */
+  --mu-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --mu-font-size: 14px;
+  --mu-font-size-sm: 12px;
+  --mu-line-height: 1.5;
+
+  /* Colors */
+  --mu-color-text: #000000;
+  --mu-color-text-secondary: #666666;
+  --mu-color-bg: #ffffff;
+  --mu-color-bg-header: #ffffff;
+  --mu-color-bg-hover: #f5f5f5;
+  --mu-color-bg-even: #fafafa;
+  --mu-color-border: #000000;
+  --mu-color-accent: #000000;
+  --mu-color-loading-bg: rgba(255, 255, 255, 0.8);
+
+  /* Spacing */
+  --mu-spacing-xs: 4px;
+  --mu-spacing-sm: 8px;
+  --mu-spacing-md: 12px;
+  --mu-spacing-lg: 16px;
+  --mu-spacing-xl: 24px;
+
+  /* Borders */
+  --mu-border-width: 1px;
+  --mu-border-radius: 0px;
+
+  /* Misc */
+  --mu-transition: 150ms ease;
+  --mu-shadow: none;
+  --mu-input-height: 32px;
+}
+
+/* Root */
+.mu-datatable {
+  font-family: var(--mu-font-family);
+  font-size: var(--mu-font-size);
+  line-height: var(--mu-line-height);
+  color: var(--mu-color-text);
+  background: var(--mu-color-bg);
+}
+
+/* Toolbar */
+.mu-datatable__toolbar {
+  padding: var(--mu-spacing-sm) 0;
+}
+
+/* Search */
+.mu-datatable__search-icon {
+  color: var(--mu-color-text-secondary);
+}
+
+.mu-datatable__search-input {
+  height: var(--mu-input-height);
+  padding: var(--mu-spacing-xs) var(--mu-spacing-sm);
+  border: var(--mu-border-width) solid var(--mu-color-border);
+  border-radius: var(--mu-border-radius);
+  font-family: var(--mu-font-family);
+  font-size: var(--mu-font-size);
+  color: var(--mu-color-text);
+  background: var(--mu-color-bg);
+  outline: none;
+  transition: border-color var(--mu-transition);
+}
+
+.mu-datatable__search-input:focus {
+  border-color: var(--mu-color-accent);
+}
+
+/* Page size */
+.mu-datatable__page-size-label {
+  font-size: var(--mu-font-size-sm);
+  color: var(--mu-color-text-secondary);
+}
+
+.mu-datatable__page-size-select {
+  height: var(--mu-input-height);
+  padding: var(--mu-spacing-xs) var(--mu-spacing-sm);
+  border: var(--mu-border-width) solid var(--mu-color-border);
+  border-radius: var(--mu-border-radius);
+  font-family: var(--mu-font-family);
+  font-size: var(--mu-font-size);
+  color: var(--mu-color-text);
+  background: var(--mu-color-bg);
+  cursor: pointer;
+  outline: none;
+}
+
+/* Table */
+.mu-datatable__table {
+  border: var(--mu-border-width) solid var(--mu-color-border);
+}
+
+/* Header */
+.mu-datatable__header {
+  background: var(--mu-color-bg-header);
+}
+
+.mu-datatable__header-cell {
+  padding: var(--mu-spacing-md) var(--mu-spacing-lg);
+  border-bottom: var(--mu-border-width) solid var(--mu-color-border);
+  font-weight: 600;
+  font-size: var(--mu-font-size);
+  color: var(--mu-color-text);
+  transition: background var(--mu-transition);
+}
+
+.mu-datatable__header-cell--sortable:hover {
+  background: var(--mu-color-bg-hover);
+}
+
+.mu-datatable__header-cell--sorted-asc,
+.mu-datatable__header-cell--sorted-desc {
+  color: var(--mu-color-accent);
+}
+
+/* Column filters */
+.mu-datatable__filter-cell {
+  padding: var(--mu-spacing-xs) var(--mu-spacing-lg);
+  border-bottom: var(--mu-border-width) solid var(--mu-color-border);
+}
+
+.mu-datatable__column-filter {
+  height: calc(var(--mu-input-height) - 4px);
+  padding: var(--mu-spacing-xs) var(--mu-spacing-sm);
+  border: var(--mu-border-width) solid var(--mu-color-border);
+  border-radius: var(--mu-border-radius);
+  font-family: var(--mu-font-family);
+  font-size: var(--mu-font-size-sm);
+  color: var(--mu-color-text);
+  background: var(--mu-color-bg);
+  outline: none;
+}
+
+.mu-datatable__column-filter:focus {
+  border-color: var(--mu-color-accent);
+}
+
+/* Body */
+.mu-datatable__cell {
+  padding: var(--mu-spacing-md) var(--mu-spacing-lg);
+  border-bottom: var(--mu-border-width) solid var(--mu-color-border);
+  font-size: var(--mu-font-size);
+}
+
+.mu-datatable__row:hover {
+  background: var(--mu-color-bg-hover);
+  transition: background var(--mu-transition);
+}
+
+.mu-datatable__row--even {
+  background: var(--mu-color-bg-even);
+}
+
+.mu-datatable__row--even:hover {
+  background: var(--mu-color-bg-hover);
+}
+
+/* Empty state */
+.mu-datatable__empty {
+  padding: var(--mu-spacing-xl);
+  color: var(--mu-color-text-secondary);
+  font-size: var(--mu-font-size);
+}
+
+/* Loading */
+.mu-datatable__loading {
+  background: var(--mu-color-loading-bg);
+  color: var(--mu-color-text-secondary);
+  font-size: var(--mu-font-size);
+}
+
+/* Footer */
+.mu-datatable__info {
+  font-size: var(--mu-font-size-sm);
+  color: var(--mu-color-text-secondary);
+}
+
+/* Pagination */
+.mu-datatable__page-btn {
+  min-width: 32px;
+  height: 32px;
+  padding: var(--mu-spacing-xs) var(--mu-spacing-sm);
+  border: var(--mu-border-width) solid var(--mu-color-border);
+  border-radius: var(--mu-border-radius);
+  font-family: var(--mu-font-family);
+  font-size: var(--mu-font-size-sm);
+  color: var(--mu-color-text);
+  background: var(--mu-color-bg);
+  transition: background var(--mu-transition), color var(--mu-transition);
+}
+
+.mu-datatable__page-btn:hover:not(.mu-datatable__page-btn--disabled):not(.mu-datatable__page-btn--active) {
+  background: var(--mu-color-bg-hover);
+}
+
+.mu-datatable__page-btn--active {
+  background: var(--mu-color-accent);
+  color: var(--mu-color-bg);
+  border-color: var(--mu-color-accent);
+  font-weight: 600;
+}
+
+.mu-datatable__page-btn--disabled {
+  opacity: 0.4;
+  color: var(--mu-color-text-secondary);
+}
+
+.mu-datatable__page-ellipsis {
+  min-width: 32px;
+  height: 32px;
+  font-size: var(--mu-font-size-sm);
+  color: var(--mu-color-text-secondary);
+}

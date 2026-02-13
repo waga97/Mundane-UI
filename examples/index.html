@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mundane UI — DataTable Demo</title>
+  <link rel="stylesheet" href="../dist/css/plain.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      padding: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      color: #000;
+      background: #fff;
+    }
+    h1 { font-size: 24px; margin-bottom: 8px; }
+    h2 { font-size: 18px; margin: 40px 0 12px; }
+    p.subtitle { color: #666; margin-bottom: 32px; font-size: 14px; }
+    .qsp-output {
+      margin-top: 12px;
+      padding: 12px 16px;
+      border: 1px solid #000;
+      font-family: monospace;
+      font-size: 13px;
+      white-space: pre-wrap;
+      word-break: break-all;
+      background: #fafafa;
+    }
+    .qsp-label { font-size: 12px; color: #666; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Mundane UI</h1>
+  <p class="subtitle">UI components that get out of your way.</p>
+
+  <h2>Frontend Mode — Client-side DataTable</h2>
+  <p style="font-size:13px;color:#666;margin-bottom:12px;">50 rows of sample data. Sorting, search, column filters, pagination — all client-side.</p>
+  <div id="frontend-table"></div>
+
+  <h2>Backend Mode — Server-side DataTable</h2>
+  <p style="font-size:13px;color:#666;margin-bottom:12px;">Simulates async API calls with setTimeout. Interactions emit query string parameters.</p>
+  <div id="backend-table"></div>
+  <p class="qsp-label">Query String Parameters (emitted on every state change):</p>
+  <div id="qsp-output" class="qsp-output">—</div>
+
+  <script type="module">
+    import { DataTable } from '../dist/index.esm.js';
+
+    // ============================================================
+    // SAMPLE DATA GENERATOR
+    // ============================================================
+
+    const firstNames = ['Alice', 'Bob', 'Charlie', 'Diana', 'Eve', 'Frank', 'Grace', 'Hank', 'Ivy', 'Jack'];
+    const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez'];
+    const departments = ['Engineering', 'Marketing', 'Sales', 'Design', 'HR', 'Finance', 'Support', 'Legal'];
+    const statuses = ['Active', 'Inactive', 'On Leave'];
+
+    function randomItem(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+    function randomInt(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
+    function pad(n) { return n.toString().padStart(2, '0'); }
+
+    function generateRow(id) {
+      const first = randomItem(firstNames);
+      const last = randomItem(lastNames);
+      const y = randomInt(2020, 2024);
+      const m = randomInt(1, 12);
+      const d = randomInt(1, 28);
+      return {
+        id,
+        name: first + ' ' + last,
+        email: first.toLowerCase() + '.' + last.toLowerCase() + '@example.com',
+        department: randomItem(departments),
+        salary: randomInt(40000, 150000),
+        joinDate: pad(d) + '/' + pad(m) + '/' + y,
+        status: randomItem(statuses),
+      };
+    }
+
+    const allData = Array.from({ length: 50 }, (_, i) => generateRow(i + 1));
+
+    // ============================================================
+    // FRONTEND TABLE
+    // ============================================================
+
+    const frontendTable = DataTable.create({
+      el: '#frontend-table',
+      mode: 'frontend',
+      data: allData,
+      pageSize: 10,
+      pageSizeOptions: [5, 10, 25, 50],
+      search: {
+        enabled: true,
+        mode: 'both',
+        debounce: 300,
+        placeholder: 'Search employees...',
+      },
+      columns: [
+        { key: 'id', label: 'ID', type: 'number', sortable: true, width: '60px' },
+        { key: 'name', label: 'Name', type: 'string', sortable: true },
+        { key: 'email', label: 'Email', type: 'string', sortable: true },
+        { key: 'department', label: 'Department', type: 'string', sortable: true },
+        { key: 'salary', label: 'Salary', type: 'number', sortable: true, thousandSeparator: true },
+        { key: 'joinDate', label: 'Join Date', type: 'date', dateFormat: 'DD/MM/YYYY', displayFormat: 'DD/MM/YYYY', sortable: true },
+        {
+          key: 'status',
+          label: 'Status',
+          type: 'custom',
+          sortable: true,
+          comparator: (a, b) => String(a).localeCompare(String(b)),
+          filterFn: (cellValue, filterValue) => String(cellValue).toLowerCase().indexOf(filterValue.toLowerCase()) !== -1,
+          searchable: true,
+          render: (row) => {
+            const colors = { Active: '#22c55e', Inactive: '#ef4444', 'On Leave': '#f59e0b' };
+            const color = colors[row.status] || '#000';
+            return '<span style="display:inline-flex;align-items:center;gap:6px;">'
+              + '<span style="width:8px;height:8px;border-radius:50%;background:' + color + ';display:inline-block;"></span>'
+              + '<span>' + row.status + '</span></span>';
+          },
+        },
+      ],
+    });
+
+    // ============================================================
+    // BACKEND TABLE (simulated)
+    // ============================================================
+
+    const qspOutput = document.getElementById('qsp-output');
+
+    // Simulated server-side processing
+    function fakeServerFetch(queryString, state) {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          let filtered = allData.slice();
+
+          // Simulate search
+          if (state.globalSearch) {
+            const s = state.globalSearch.toLowerCase();
+            filtered = filtered.filter(row =>
+              row.name.toLowerCase().includes(s) ||
+              row.email.toLowerCase().includes(s) ||
+              row.department.toLowerCase().includes(s)
+            );
+          }
+
+          // Simulate column filters
+          for (const [key, val] of Object.entries(state.columnFilters)) {
+            if (!val) continue;
+            const v = val.toLowerCase();
+            filtered = filtered.filter(row => String(row[key]).toLowerCase().includes(v));
+          }
+
+          // Simulate sort
+          if (state.sortBy && state.sortOrder !== 'none') {
+            const dir = state.sortOrder === 'asc' ? 1 : -1;
+            filtered.sort((a, b) => {
+              const va = a[state.sortBy];
+              const vb = b[state.sortBy];
+              if (typeof va === 'number' && typeof vb === 'number') return dir * (va - vb);
+              return dir * String(va).localeCompare(String(vb));
+            });
+          }
+
+          const total = filtered.length;
+          const start = (state.currentPage - 1) * state.pageSize;
+          const pageData = filtered.slice(start, start + state.pageSize);
+
+          resolve({ data: pageData, totalRows: total });
+        }, 400); // 400ms fake latency
+      });
+    }
+
+    let backendTable;
+
+    // Initial fetch
+    fakeServerFetch('?page=1&pageSize=10', { currentPage: 1, pageSize: 10, sortBy: null, sortOrder: 'none', globalSearch: '', columnFilters: {} })
+      .then(result => {
+        backendTable = DataTable.create({
+          el: '#backend-table',
+          mode: 'backend',
+          data: result.data,
+          totalRows: result.totalRows,
+          pageSize: 10,
+          pageSizeOptions: [5, 10, 25],
+          search: {
+            enabled: true,
+            mode: 'global',
+            debounce: 400,
+            placeholder: 'Search (backend)...',
+          },
+          columns: [
+            { key: 'id', label: 'ID', type: 'number', sortable: true, width: '60px' },
+            { key: 'name', label: 'Name', type: 'string', sortable: true },
+            { key: 'email', label: 'Email', type: 'string', sortable: true },
+            { key: 'department', label: 'Department', type: 'string', sortable: true },
+            { key: 'salary', label: 'Salary', type: 'number', sortable: true },
+            { key: 'status', label: 'Status', type: 'string', sortable: true },
+          ],
+          onStateChange: (queryString, state) => {
+            qspOutput.textContent = queryString;
+            fakeServerFetch(queryString, state).then(result => {
+              backendTable.setData(result.data, result.totalRows);
+            });
+          },
+        });
+      });
+  </script>
+</body>
+</html>

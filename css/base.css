@@ -1,0 +1,184 @@
+/* mundane-ui: base.css — structural styles only (no colors, no visual styling) */
+
+.mu-datatable {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+}
+
+/* Toolbar */
+.mu-datatable__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.mu-datatable__search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+}
+
+.mu-datatable__search-input {
+  box-sizing: border-box;
+}
+
+.mu-datatable__page-size {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.mu-datatable__page-size-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.mu-datatable__page-size-select {
+  box-sizing: border-box;
+}
+
+/* Table */
+.mu-datatable__table-wrapper {
+  position: relative;
+  overflow-x: auto;
+}
+
+.mu-datatable__table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+/* Header */
+.mu-datatable__header-cell {
+  text-align: left;
+  white-space: nowrap;
+  user-select: none;
+  vertical-align: bottom;
+}
+
+.mu-datatable__header-cell--sortable {
+  cursor: pointer;
+}
+
+.mu-datatable__header-label {
+  display: inline;
+  vertical-align: middle;
+}
+
+.mu-datatable__sort-icon-wrapper {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+.mu-datatable__sort-icon {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Column filter row */
+.mu-datatable__filter-row {
+  /* structural only */
+}
+
+.mu-datatable__filter-cell {
+  vertical-align: top;
+}
+
+.mu-datatable__column-filter {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Body */
+.mu-datatable__body {
+  /* structural only */
+}
+
+.mu-datatable__row {
+  /* structural only */
+}
+
+.mu-datatable__cell {
+  vertical-align: top;
+}
+
+/* Empty state */
+.mu-datatable__empty {
+  text-align: center;
+}
+
+/* Loading overlay */
+.mu-datatable__loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  z-index: 10;
+}
+
+/* Footer */
+.mu-datatable__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.mu-datatable__info {
+  flex-shrink: 0;
+}
+
+/* Pagination */
+.mu-datatable__pagination {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-left: auto;
+}
+
+.mu-datatable__page-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.mu-datatable__page-btn--disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.mu-datatable__page-ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Spinner animation */
+@keyframes mu-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.mu-datatable__spinner {
+  animation: mu-spin 0.8s linear infinite;
+}

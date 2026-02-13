@@ -1,0 +1,37 @@
+{
+  "name": "mundane-ui",
+  "version": "0.1.0",
+  "description": "UI components that get out of your way. Framework-agnostic, zero-dependency, fully customizable.",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./css/*": "./dist/css/*"
+  },
+  "sideEffects": [
+    "./dist/css/**"
+  ],
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c --watch"
+  },
+  "keywords": ["datatable", "table", "ui", "components", "framework-agnostic", "lightweight", "css", "customizable"],
+  "type": "module",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "rollup": "^4.9.0",
+    "@rollup/plugin-typescript": "^11.1.0",
+    "rollup-plugin-copy": "^3.5.0",
+    "typescript": "^5.3.0",
+    "tslib": "^2.6.0"
+  }
+}
