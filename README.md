@@ -1,8 +1,30 @@
-# Mundane UI
+<p align="center">
+  <img src="mundane-logo.png" alt="Mundane UI" width="120" />
+</p>
 
-> UI components that get out of your way.
+<h1 align="center">Mundane UI</h1>
 
-Framework-agnostic, zero-dependency, lightweight UI component library. Written in TypeScript, works everywhere — React, Vue, Angular, Svelte, or plain HTML.
+<p align="center">
+  <strong>The boring UI library.</strong><br>
+  Framework-agnostic, zero-dependency, lightweight UI component library.<br>
+  Written in TypeScript, works everywhere — React, Vue, Angular, Svelte, or plain HTML.
+</p>
+
+<p align="center">
+  <a href="https://www.npmjs.com/package/mundane-ui"><img src="https://img.shields.io/npm/v/mundane-ui?color=ea580c&label=npm" alt="npm version"></a>
+  <a href="https://www.npmjs.com/package/mundane-ui"><img src="https://img.shields.io/npm/dm/mundane-ui?color=f97316" alt="npm downloads"></a>
+  <a href="https://github.com/waga97/Mundane-UI/blob/main/LICENSE"><img src="https://img.shields.io/github/license/waga97/Mundane-UI?color=f48c06" alt="license"></a>
+  <img src="https://img.shields.io/badge/dependencies-0-brightgreen" alt="zero dependencies">
+  <img src="https://img.shields.io/badge/gzipped-~9KB-blue" alt="bundle size">
+</p>
+
+<p align="center">
+  <a href="https://mundane-ui.vercel.app">Documentation</a> ·
+  <a href="https://mundane-ui.vercel.app/guide/getting-started">Getting Started</a> ·
+  <a href="https://mundane-ui.vercel.app/guide/why">Why This Exists</a>
+</p>
+
+---
 
 ## Install
 

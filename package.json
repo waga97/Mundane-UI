@@ -24,6 +24,14 @@
     "dev": "rollup -c --watch"
   },
   "keywords": ["datatable", "table", "ui", "components", "framework-agnostic", "lightweight", "css", "customizable"],
+  "homepage": "https://mundane-ui.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/waga97/Mundane-UI"
+  },
+  "bugs": {
+    "url": "https://github.com/waga97/Mundane-UI/issues"
+  },
   "type": "module",
   "license": "MIT",
   "dependencies": {},

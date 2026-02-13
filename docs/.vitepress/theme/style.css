@@ -1,0 +1,398 @@
+/* ============================================================
+   MUNDANE UI DOCS — Custom Theme
+   Warm, modern, makes-you-go-wow.
+   ============================================================ */
+
+/* --- Brand Colors: Warm amber/orange gradient palette --- */
+:root {
+  --vp-c-brand-1: #e85d04;
+  --vp-c-brand-2: #dc4c04;
+  --vp-c-brand-3: #f48c06;
+  --vp-c-brand-soft: rgba(232, 93, 4, 0.08);
+
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-text: #ffffff;
+  --vp-button-brand-bg: #e85d04;
+  --vp-button-brand-hover-border: transparent;
+  --vp-button-brand-hover-text: #ffffff;
+  --vp-button-brand-hover-bg: #dc4c04;
+  --vp-button-brand-active-border: transparent;
+  --vp-button-brand-active-text: #ffffff;
+  --vp-button-brand-active-bg: #c44003;
+
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(135deg, #e85d04 0%, #f48c06 50%, #ffba08 100%);
+  --vp-home-hero-image-background-image: linear-gradient(135deg, rgba(232, 93, 4, 0.2) 0%, rgba(255, 186, 8, 0.15) 100%);
+  --vp-home-hero-image-filter: blur(56px);
+
+  --mu-docs-accent: #e85d04;
+  --mu-docs-accent-light: #f48c06;
+  --mu-docs-accent-bg: rgba(232, 93, 4, 0.06);
+  --mu-docs-surface: #ffffff;
+  --mu-docs-surface-raised: #fafafa;
+  --mu-docs-border-subtle: #e8e8e8;
+}
+
+.dark {
+  --vp-c-brand-1: #f48c06;
+  --vp-c-brand-2: #ffba08;
+  --vp-c-brand-3: #e85d04;
+  --vp-c-brand-soft: rgba(244, 140, 6, 0.1);
+
+  --vp-button-brand-border: transparent;
+  --vp-button-brand-text: #1a1a1a;
+  --vp-button-brand-bg: #f48c06;
+  --vp-button-brand-hover-border: transparent;
+  --vp-button-brand-hover-text: #1a1a1a;
+  --vp-button-brand-hover-bg: #ffba08;
+  --vp-button-brand-active-border: transparent;
+  --vp-button-brand-active-text: #1a1a1a;
+  --vp-button-brand-active-bg: #e85d04;
+
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: linear-gradient(135deg, #f48c06 0%, #ffba08 50%, #ffe066 100%);
+
+  --mu-docs-accent: #f48c06;
+  --mu-docs-accent-light: #ffba08;
+  --mu-docs-accent-bg: rgba(244, 140, 6, 0.08);
+  --mu-docs-surface: #1e1e1e;
+  --mu-docs-surface-raised: #252525;
+  --mu-docs-border-subtle: #333333;
+}
+
+/* --- Hero --- */
+.VPHero .name {
+  font-weight: 900 !important;
+  letter-spacing: -0.04em;
+}
+
+.VPHero .text {
+  font-weight: 500 !important;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--vp-c-text-1) 0%, var(--vp-c-text-2) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.VPHero .tagline {
+  font-size: 17px !important;
+  line-height: 1.7 !important;
+  max-width: 580px;
+  color: var(--vp-c-text-2) !important;
+}
+
+/* --- Feature cards with hover glow --- */
+.VPFeatures .VPFeature {
+  border: 1px solid var(--mu-docs-border-subtle) !important;
+  background: var(--mu-docs-surface) !important;
+  border-radius: 12px !important;
+  transition: all 0.3s ease !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.VPFeatures .VPFeature::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--mu-docs-accent), var(--mu-docs-accent-light));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.VPFeatures .VPFeature:hover {
+  border-color: var(--mu-docs-accent) !important;
+  box-shadow: 0 8px 32px rgba(232, 93, 4, 0.08), 0 2px 8px rgba(0,0,0,0.04) !important;
+  transform: translateY(-2px);
+}
+
+.VPFeatures .VPFeature:hover::before {
+  opacity: 1;
+}
+
+.VPFeatures .title {
+  font-weight: 700 !important;
+  font-size: 15px !important;
+}
+
+.VPFeatures .details {
+  font-size: 13px !important;
+  line-height: 1.7 !important;
+  color: var(--vp-c-text-2) !important;
+}
+
+/* --- Nav logo alignment --- */
+.VPNavBar .VPImage.logo {
+  height: 32px !important;
+  width: 32px !important;
+}
+
+.VPNavBarTitle .title {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+/* --- Sidebar polish --- */
+.VPSidebar .group .title {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--vp-c-text-3);
+}
+
+/* --- Demo window frame --- */
+.demo-window {
+  margin: 28px 0;
+  border: 1px solid var(--mu-docs-border-subtle);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--mu-docs-surface);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.3s ease;
+}
+
+.demo-window:hover {
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Browser-style title bar */
+.demo-window__titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: var(--mu-docs-surface-raised);
+  border-bottom: 1px solid var(--mu-docs-border-subtle);
+}
+
+.demo-window__dots {
+  display: flex;
+  gap: 6px;
+}
+
+.demo-window__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.demo-window__dot--red { background: #ff5f57; }
+.demo-window__dot--yellow { background: #ffbd2e; }
+.demo-window__dot--green { background: #28c840; }
+
+/* Tabs */
+.demo-window__tabs {
+  display: flex;
+  gap: 2px;
+  background: var(--mu-docs-border-subtle);
+  border-radius: 8px;
+  padding: 2px;
+}
+
+.demo-window__tab {
+  padding: 5px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: var(--vp-c-text-3);
+  transition: all 0.2s ease;
+  font-family: var(--vp-font-family-base);
+  letter-spacing: 0.01em;
+}
+
+.demo-window__tab:hover {
+  color: var(--vp-c-text-1);
+}
+
+.demo-window__tab--active {
+  background: var(--mu-docs-surface);
+  color: var(--mu-docs-accent);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* Spacer for titlebar */
+.demo-window__spacer {
+  width: 64px;
+}
+
+/* Preview pane */
+.demo-window__preview {
+  padding: 32px 32px;
+  background: var(--mu-docs-surface);
+  min-height: 200px;
+}
+
+/* Code pane */
+.demo-window__code {
+  max-height: 500px;
+  overflow: auto;
+}
+
+.demo-window__code div[class*="language-"] {
+  margin: 0 !important;
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+/* --- Make tables inside demos look GOOD --- */
+.demo-window__preview .mu-datatable {
+  /* Colors */
+  --mu-color-border: #e2e8f0;
+  --mu-color-bg-header: #f8fafc;
+  --mu-color-bg-hover: #fff7ed;
+  --mu-color-bg-even: #fafafa;
+  --mu-color-accent: #e85d04;
+
+  /* Shape */
+  --mu-border-radius: 8px;
+  --mu-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+
+  /* Typography */
+  --mu-font-size: 14px;
+  --mu-font-size-sm: 13px;
+
+  /* Spacing — generous padding so it doesn't look cramped */
+  --mu-spacing-xs: 6px;
+  --mu-spacing-sm: 10px;
+  --mu-spacing-md: 14px;
+  --mu-spacing-lg: 20px;
+  --mu-spacing-xl: 28px;
+  --mu-input-height: 38px;
+}
+
+.dark .demo-window__preview .mu-datatable {
+  --mu-color-border: #374151;
+  --mu-color-bg: #1e1e1e;
+  --mu-color-bg-header: #252525;
+  --mu-color-bg-hover: #2d2416;
+  --mu-color-bg-even: #232323;
+  --mu-color-accent: #f48c06;
+  --mu-color-text: #e5e7eb;
+  --mu-color-text-secondary: #9ca3af;
+  --mu-color-loading-bg: rgba(30, 30, 30, 0.8);
+}
+
+/* Override VitePress table styles inside demo previews */
+.demo-window__preview table {
+  display: table;
+  margin: 0;
+  overflow: visible;
+}
+
+.demo-window__preview tr {
+  border: none;
+  background: transparent !important;
+  transition: none !important;
+}
+
+.demo-window__preview tr:nth-child(2n) {
+  background: transparent !important;
+}
+
+.demo-window__preview th,
+.demo-window__preview td {
+  border: none;
+  padding: 0;
+}
+
+.demo-window__preview thead {
+  background: transparent;
+}
+
+/* Legacy demo-container override (for backward compat) */
+.demo-container table {
+  display: table;
+  margin: 0;
+  overflow: visible;
+}
+
+.demo-container tr {
+  border: none;
+  background: transparent !important;
+}
+
+.demo-container tr:nth-child(2n) {
+  background: transparent !important;
+}
+
+.demo-container th,
+.demo-container td {
+  border: none;
+  padding: 0;
+}
+
+.demo-container thead {
+  background: transparent;
+}
+
+/* QSP output */
+.qsp-output {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background: var(--mu-docs-surface-raised);
+  border: 1px solid var(--mu-docs-border-subtle);
+  border-radius: 8px;
+  font-family: var(--vp-font-family-mono);
+  font-size: 13px;
+  word-break: break-all;
+  white-space: pre-wrap;
+  color: var(--vp-c-text-2);
+}
+
+.qsp-label {
+  font-size: 12px;
+  color: var(--vp-c-text-3);
+  margin-top: 12px;
+  margin-bottom: 6px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* --- Page polish --- */
+.vp-doc h1 {
+  letter-spacing: -0.03em;
+  font-weight: 800;
+}
+
+.vp-doc h2 {
+  letter-spacing: -0.02em;
+  border-top: 1px solid var(--mu-docs-border-subtle);
+  padding-top: 28px;
+}
+
+/* --- Make code blocks crispy --- */
+.vp-doc div[class*="language-"] {
+  border: 1px solid var(--mu-docs-border-subtle);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* --- Content width bump for guide pages --- */
+.vp-doc.container {
+  max-width: 800px;
+}
+
+/* --- Custom callout style for tips --- */
+.vp-doc .custom-block.tip {
+  border-color: var(--mu-docs-accent);
+  background: var(--mu-docs-accent-bg);
+}
+
+.vp-doc .custom-block.tip .custom-block-title {
+  color: var(--mu-docs-accent);
+}
+
+/* --- Custom callout style for warnings --- */
+.vp-doc .custom-block.warning {
+  border-color: #d97706;
+}
